@@ -1,0 +1,26 @@
+{
+    "discord.py": {
+        "branch": "master",
+        "description": "An API wrapper for Discord written in Python.",
+        "homepage": "http://discordpy.rtfd.org/en/latest",
+        "owner": "Rapptz",
+        "repo": "discord.py",
+        "rev": "d1cb30cccf39648e21c0f7c73cb087fc730b8e25",
+        "sha256": "1qg48h93ayc6cq5ybnpkjv4jahfh3vr5fjfjc55cdrvba0rkamb2",
+        "type": "tarball",
+        "url": "https://github.com/Rapptz/discord.py/archive/d1cb30cccf39648e21c0f7c73cb087fc730b8e25.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgs": {
+        "branch": "release-20.09",
+        "description": "Nix Packages collection",
+        "homepage": "",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "e34208e10033315fddf6909d3ff68e2d3cf48a23",
+        "sha256": "0ngkx5ny7bschmiwc5q9yza8fdwlc3zg47avsywwp8yn96k2cpmg",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/e34208e10033315fddf6909d3ff68e2d3cf48a23.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    }
+}
