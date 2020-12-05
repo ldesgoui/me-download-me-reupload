@@ -14,7 +14,7 @@ RE = re.compile(
 )
 YTDL_OPTIONS = dict(format=os.getenv("YTDL_FORMAT", "360"), outtmpl="%(title)s.%(ext)s",)
 TWITCH_CHANNEL = os.getenv("TWITCH_CHANNEL", "MOONMOON")
-DISCORD_CHANNEL = os.getenv("DISCORD_CHANNEL", "193945356604538889")
+DISCORD_CHANNEL = int(os.getenv("DISCORD_CHANNEL", "193945356604538889"))
 
 logging.basicConfig(level=logging.INFO)
 client = discord.Client()
@@ -56,7 +56,7 @@ async def on_message(message):
 
         with open(filename, "rb") as fp:
             logging.info(f"Uploading {filename}")
-            await message.channel.send(file=discord.File(fp))
+            await message.reply(file=discord.File(fp))
 
 
 async def download(url, loop):
