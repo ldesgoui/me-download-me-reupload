@@ -4,6 +4,7 @@ import asyncio
 import logging
 import os
 import re
+import sys
 
 import discord
 import youtube_dl
@@ -16,7 +17,7 @@ YTDL_OPTIONS = dict(format=os.getenv("YTDL_FORMAT", "360"), outtmpl="%(title)s.%
 TWITCH_CHANNEL = os.getenv("TWITCH_CHANNEL", "MOONMOON")
 DISCORD_CHANNEL = int(os.getenv("DISCORD_CHANNEL", "193945356604538889"))
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(levelname)-8s %(module)s: %(message)s")
 client = discord.Client()
 
 
@@ -77,5 +78,8 @@ async def delete(filename):
 
 
 if __name__ == "__main__":
+    if "BOT_TOKEN" not in os.environ:
+        logging.error(f"Must set environment variable BOT_TOKEN to your Discord bot token")
+        sys.exit(1)
     logging.info(f"Reuploading clips from {TWITCH_CHANNEL} in channel {DISCORD_CHANNEL}")
     client.run(os.getenv("BOT_TOKEN"))
