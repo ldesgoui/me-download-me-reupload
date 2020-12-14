@@ -13,7 +13,7 @@ import youtube_dl
 RE = re.compile(
     r"https?://(?:clips\.twitch\.tv/(?:embed\?.*?\bclip=|(?:[^/]+/)*)|(?:(?:www|go|m)\.)?twitch\.tv/[^/]+/clip/)\w+"
 )
-YTDL_OPTIONS = dict(format=os.getenv("YTDL_FORMAT", "360"), outtmpl="%(title)s.%(ext)s",)
+YTDL_OPTIONS = dict(format=os.getenv("YTDL_FORMAT", "360"), outtmpl="%(id)s.%(ext)s",)
 TWITCH_CHANNEL = os.getenv("TWITCH_CHANNEL", "MOONMOON")
 DISCORD_CHANNEL = int(os.getenv("DISCORD_CHANNEL", "193945356604538889"))
 
@@ -47,7 +47,7 @@ async def on_message(message):
         processed_urls.add(url)
 
         info = await download(url, client.loop)
-        filename = "{title}.{ext}".format_map(info)
+        filename = "{id}.{ext}".format_map(info)
 
         asyncio.create_task(delete(filename))
 
@@ -57,7 +57,10 @@ async def on_message(message):
 
         with open(filename, "rb") as fp:
             logging.info(f"Uploading {filename}")
-            await message.reply(file=discord.File(fp))
+            await message.reply(
+                "> {title}\nclipped by {uploader}".format_map(info),
+                file=discord.File(fp),
+            )
 
 
 async def download(url, loop):
