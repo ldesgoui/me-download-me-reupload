@@ -46,7 +46,10 @@ async def on_message(message):
             continue
         processed_urls.add(url)
 
-        info = await download(url, client.loop)
+        try:
+            info = await download(url, client.loop)
+        except youtube_dl.utils.YoutubeDLError:
+            continue
         filename = "{id}.{ext}".format_map(info)
 
         asyncio.create_task(delete(filename))
@@ -59,7 +62,7 @@ async def on_message(message):
             logging.info(f"Uploading {filename}")
             await message.reply(
                 "> {title}\nclipped by {uploader}".format_map(info),
-                file=discord.File(fp),
+                file=discord.File(fp, filename="{title}.{ext}".format_map(info)),
             )
 
 
